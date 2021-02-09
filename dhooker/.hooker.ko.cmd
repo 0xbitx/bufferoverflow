@@ -1,0 +1,1 @@
+cmd_/home/korkeep/HackRPi/dhooker/hooker.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/korkeep/HackRPi/dhooker/hooker.ko /home/korkeep/HackRPi/dhooker/hooker.o /home/korkeep/HackRPi/dhooker/hooker.mod.o
