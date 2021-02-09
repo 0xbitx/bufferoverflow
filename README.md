@@ -62,3 +62,7 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 ```
 - **Result**  
 ![hook](https://user-images.githubusercontent.com/20378368/107398121-a9759100-6b42-11eb-8563-ac5b69a92a58.png)
+```
+pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
+pi@raspberrypi:~/Hook$ sudo rmmod hooker
+```
