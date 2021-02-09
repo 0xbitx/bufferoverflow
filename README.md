@@ -1,5 +1,5 @@
 # HackRPi
-## Kernel configuration
+## RPi Kernel configuration
 - Mount SD card
 ```
 kss@ubuntu:~/HackRPi$ sudo mkdir /mnt/raspi
@@ -9,20 +9,20 @@ kss@ubuntu:~/HackRPi$ sudo mount /dev/sdb2 /mnt/fs
 ```
 - Copy kernel image
 ```
-kss@ubuntu:~/HackRPi$ sudo cp ./linux-kernel/zImage /mnt/raspi/kernel7.img
+kss@ubuntu:~/HackRPi$ sudo cp ./linux/zImage /mnt/raspi/kernel7.img
 ```
 - Copy modules
 ```
-kss@ubuntu:~/HackRPi$ sudo cp -r ./linux-kernel/4.4.50-v7+/ /mnt/fs/lib/modules/
+kss@ubuntu:~/HackRPi$ sudo cp -r ./linux/4.4.50-v7+/ /mnt/fs/lib/modules/
 ```
 - Copy device tree blob
 ```
-kss@ubuntu:~/HackRPi$ sudo cp ./linux-kernel/*.dtb /mnt/raspi/
+kss@ubuntu:~/HackRPi$ sudo cp ./linux/*.dtb /mnt/raspi/
 ```
 - Copy device tree blob overlays
 ```
-kss@ubuntu:~/HackRPi$ sudo cp ./linux-kernel/*.dtb* /mnt/raspi/overlays
-kss@ubuntu:~/HackRPi$ sudo cp ./linux-kernel/README /mnt/raspi/overlays
+kss@ubuntu:~/HackRPi$ sudo cp ./linux/*.dtb* /mnt/raspi/overlays
+kss@ubuntu:~/HackRPi$ sudo cp ./linux/README /mnt/raspi/overlays
 ```
 - Unmount SD card
 ```
