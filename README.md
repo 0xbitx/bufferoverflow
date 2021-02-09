@@ -61,7 +61,7 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/raspi
 kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 ```
 - **Result**  
-![hook](https://user-images.githubusercontent.com/20378368/107398121-a9759100-6b42-11eb-8563-ac5b69a92a58.png)
+![image](https://user-images.githubusercontent.com/20378368/107399269-dbd3be00-6b43-11eb-9422-c7fb6c2589d8.png)
 ```
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
 pi@raspberrypi:~/Hook$ sudo rmmod hooker
