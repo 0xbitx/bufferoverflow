@@ -29,7 +29,7 @@ kss@ubuntu:~/HackRPi$ sudo cp ./linux/README /mnt/raspi/overlays
 kss@ubuntu:~/HackRPi$ sudo umount /mnt/raspi
 kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 ```
-## System call hooking
+## System call hooking 🐱‍💻
 ### Kernel modification attack
 - **Step 1**: Check malicious module  
 ![image](https://user-images.githubusercontent.com/20378368/107459865-6d6e1a80-6b9a-11eb-9713-7319c7e2b622.png)
@@ -56,8 +56,8 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
 pi@raspberrypi:~/Hook$ sudo rmmod hooker
 ```
-## Buffer Overflow
+## Buffer Overflow 🐱‍💻
 
-## Return-Oriented Programming
+## Return-Oriented Programming 🐱‍💻
 
-## Return-To-Libc
+## Return-To-Libc 🐱‍💻
