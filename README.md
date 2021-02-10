@@ -29,29 +29,19 @@ kss@ubuntu:~/HackRPi$ sudo cp ./linux/README /mnt/raspi/overlays
 kss@ubuntu:~/HackRPi$ sudo umount /mnt/raspi
 kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 ```
-
-## Buffer Overflow
-
-## Return-Oriented Programming
-
-## Return-To-Libc
-
 ## System call hooking
 ### Kernel modification attack
-- **Step 1**: Build malicious module  
-![image](https://user-images.githubusercontent.com/20378368/107340733-7232c000-6b01-11eb-9f16-652ee58ed41c.png)
-```
-kss@ubuntu:~/RPi/Hook$ make
-```
+- **Step 1**: Check malicious module  
+![image](https://user-images.githubusercontent.com/20378368/107459865-6d6e1a80-6b9a-11eb-9713-7319c7e2b622.png)
 - **Step 2**: Check SD card  
 ![image](https://user-images.githubusercontent.com/20378368/107325262-d303cd80-6aec-11eb-85fe-6e6c9f196352.png)
 ```
-kss@ubuntu:~/RPi/Hook$ lsblk
+kss@ubuntu:~/HackRPi/Hook$ lsblk
 ```
 - **Step 3**: Mount SD card  
 ```
-kss@ubuntu:~/RPi/Hook$ sudo mount /dev/sdb1 /mnt/raspi
-kss@ubuntu:~/RPi/Hook$ sudo mount /dev/sdb2 /mnt/fs
+kss@ubuntu:~/HackRPi/Hook$ sudo mount /dev/sdb1 /mnt/raspi
+kss@ubuntu:~/HackRPi/Hook$ sudo mount /dev/sdb2 /mnt/fs
 ```
 - **Step 4**: Copy malicious module  
 ```
@@ -66,3 +56,8 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
 pi@raspberrypi:~/Hook$ sudo rmmod hooker
 ```
+## Buffer Overflow
+
+## Return-Oriented Programming
+
+## Return-To-Libc
