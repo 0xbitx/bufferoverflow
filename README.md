@@ -53,7 +53,6 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 - **Step 5**: Insert malicious module to RPi  
 ```
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
-pi@raspberrypi:~/Hook$ sudo rmmod hooker
 ```
 - **Result**  
 ![image](https://user-images.githubusercontent.com/20378368/107609218-a0d7a480-6c81-11eb-9e77-83a704dfe2c9.png)
