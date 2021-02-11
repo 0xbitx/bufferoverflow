@@ -66,11 +66,11 @@ pi@korkeep:~/BOF $ gcc -fno-stack-protector -z execstack BOF.c -o BOF
 pi@korkeep:~/BOF $ gdb -q BOF
 ```
 - **Step 3**: Disassemble the main function  
-![image](https://user-images.githubusercontent.com/20378368/107646868-d0a49d80-6cbd-11eb-833b-0ac58a158e63.png)  
 ```
 (gdb) disassemble main
 ```
 - **Step 4**: Set a breakpoint to hack  
+![image](https://user-images.githubusercontent.com/20378368/107657827-e1a6dc00-6cc8-11eb-9891-0387c6b8c34b.png)  
 ```
 // Breakpoint target:
 // 0x00010530 <+40>:    mov     r3, #0
