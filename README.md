@@ -1,5 +1,5 @@
 # HackRPi
-## RPi Kernel configuration
+## Insert kernel files to RPi
 - **Step 1**: Mount SD card  
 ```
 kss@ubuntu:~/HackRPi$ sudo mkdir /mnt/raspi
@@ -50,12 +50,13 @@ kss@ubuntu:~/HackRPi$ sudo cp -r ./Hook /mnt/fs/home/pi
 kss@ubuntu:~/HackRPi$ sudo umount /mnt/raspi
 kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 ```
-- **Result**  
-![image](https://user-images.githubusercontent.com/20378368/107399269-dbd3be00-6b43-11eb-9422-c7fb6c2589d8.png)
+- **Step 5**: Insert & Remove module  
 ```
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
 pi@raspberrypi:~/Hook$ sudo rmmod hooker
 ```
+- **Result**  
+![image](https://user-images.githubusercontent.com/20378368/107399269-dbd3be00-6b43-11eb-9422-c7fb6c2589d8.png)
 ## Buffer Overflow 🐱‍💻
 
 ## Return-Oriented Programming 🐱‍💻
