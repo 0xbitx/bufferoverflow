@@ -60,7 +60,7 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
 ```
 - **Result**  
-![image](https://user-images.githubusercontent.com/20378368/107657527-97bdf600-6cc8-11eb-8165-81f5bb721fc0.png)  
+![image](https://user-images.githubusercontent.com/20378368/107659443-7fe77180-6cca-11eb-8289-478622d81042.png)  
 
 ## Buffer Overflow 🐱‍💻
 - **Step 1**: Compile without stack protection  
