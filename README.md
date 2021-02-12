@@ -60,7 +60,7 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 pi@raspberrypi:~/Hook$ sudo insmod hooker.ko
 ```
 - **Result**  
-![image](https://user-images.githubusercontent.com/20378368/107734985-fecbc100-6d41-11eb-8e3c-b4e42875d89e.PNG)  
+![image](https://user-images.githubusercontent.com/20378368/107735072-30dd2300-6d42-11eb-888f-a2340d252d6c.PNG)
 
 ## Buffer Overflow 🐱‍💻
 - **Step 1**: Unlock ASLR  
