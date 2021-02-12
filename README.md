@@ -39,10 +39,10 @@ kss@ubuntu:~/HackRPi$ sudo umount /mnt/fs
 - **Step 1**: Check malicious module  
 ![image](https://user-images.githubusercontent.com/20378368/107459865-6d6e1a80-6b9a-11eb-9713-7319c7e2b622.png)  
 - **Step 2**: Check SD card  
-![image](https://user-images.githubusercontent.com/20378368/107325262-d303cd80-6aec-11eb-85fe-6e6c9f196352.png)  
 ```
 kss@ubuntu:~/HackRPi/Hook$ lsblk
 ```
+![image](https://user-images.githubusercontent.com/20378368/107325262-d303cd80-6aec-11eb-85fe-6e6c9f196352.png)  
 - **Step 3**: Mount SD card  
 ```
 kss@ubuntu:~/HackRPi/Hook$ sudo mount /dev/sdb1 /mnt/raspi
@@ -77,10 +77,10 @@ pi@korkeep:~/BOF $ gdb -q BOF
 (gdb) start
 ```
 - **Step 4**: Disassemble main  
-![image](https://user-images.githubusercontent.com/20378368/107657827-e1a6dc00-6cc8-11eb-9891-0387c6b8c34b.png)  
 ```
 (gdb) disassemble main
 ```
+![image](https://user-images.githubusercontent.com/20378368/107657827-e1a6dc00-6cc8-11eb-9891-0387c6b8c34b.png)  
 - **Step 5**: Set a breakpoint to hack  
 ```
 // Breakpoint target:
@@ -88,10 +88,10 @@ pi@korkeep:~/BOF $ gdb -q BOF
 (gdb) b *0x00010530
 ```
 - **Step 6**: Analyze address state  
-![image](https://user-images.githubusercontent.com/20378368/107655183-a86d6c80-6cc6-11eb-9a09-7223b26fdd69.png)  
 ```
 (gdb) x/100x $sp-200
 ```
+![image](https://user-images.githubusercontent.com/20378368/107655183-a86d6c80-6cc6-11eb-9a09-7223b26fdd69.png)  
 - **Step 7**: Buffer overflow using NOP sled  
 ```
 // Target address: 0x7efff570
@@ -107,28 +107,28 @@ pi@korkeep:~/BOF $ gdb -q BOF
 pi@korkeep:~/RTL $ sudo sysctl -w kernel.randomize_va_space=0
 ```
 - **Step 2**: Compile without stack protection  
-![image](https://user-images.githubusercontent.com/20378368/107732766-87476300-6d3c-11eb-88cf-ee929dbae4ee.png)  
 ```
-// To practice RTL attack, compile with all these options
+// To practice RTL attack, you should compile with all these options
 // However, Raspberry Pi3 does not support some options
 pi@korkeep:~/RTL $ gcc -m32 -mpreferred-stack-boundary=2 -fno-stack-protector -no-pie -fno-pic -o RTL RTL.c
 ```
+![image](https://user-images.githubusercontent.com/20378368/107732766-87476300-6d3c-11eb-88cf-ee929dbae4ee.png)  
 - **Step 3**: Debugging with gdb  
-![image](https://user-images.githubusercontent.com/20378368/107732076-c70d4b00-6d3a-11eb-9929-fd4c3664b426.png)  
 ```
 pi@korkeep:~/RTL $ gdb -q RTL
 (gdb) start
 ```
+![image](https://user-images.githubusercontent.com/20378368/107732076-c70d4b00-6d3a-11eb-9929-fd4c3664b426.png)  
 - **Step 4**: Print system() address  
-![image](https://user-images.githubusercontent.com/20378368/107729508-7bf03980-6d34-11eb-91f3-331a02ad046f.png)  
 ```
 (gdb) print system
 ```
+![image](https://user-images.githubusercontent.com/20378368/107729508-7bf03980-6d34-11eb-91f3-331a02ad046f.png)  
 - **Step 5**: Find /bin/sh address  
-![image](https://user-images.githubusercontent.com/20378368/107729545-90343680-6d34-11eb-8a79-fc45acf8ab5c.png)  
 ```
 (gdb) find &system, +99999999, "/bin/sh"
 ```
+![image](https://user-images.githubusercontent.com/20378368/107729545-90343680-6d34-11eb-8a79-fc45acf8ab5c.png)  
 - **Step 6**: RTL attack using system(), /bin/sh address  
 ```
 // Target address: 0x76e9ffac, 0x76f83c68
@@ -151,16 +151,16 @@ pi@korkeep:~/RTL $ gdb -q RTL
 (gdb) start
 ```
 - **Step 4**: Disassemble rtl()  
-![image](https://user-images.githubusercontent.com/20378368/107731737-0ab38500-6d3a-11eb-9b3e-07e1e3181b0b.png)  
 ```
 (gdb) disassemble rtl
 ```
+![image](https://user-images.githubusercontent.com/20378368/107731737-0ab38500-6d3a-11eb-9b3e-07e1e3181b0b.png)  
 - **Step 5**: Find system(), /bin/sh address  
-![image](https://user-images.githubusercontent.com/20378368/107734782-8ebd3b00-6d41-11eb-83c3-b4d42e5740ae.png)  
 ```
 (gdb) x/x 0x10494
 (gdb) x/s 0x10558
 ```
+![image](https://user-images.githubusercontent.com/20378368/107734782-8ebd3b00-6d41-11eb-83c3-b4d42e5740ae.png)  
 - **Step 6**: RTL attack using ldr address  
 ```
 //Target: 0x00010488
