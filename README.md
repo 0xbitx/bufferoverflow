@@ -4,6 +4,9 @@
 - [Return-To-Libc](https://github.com/korkeep/HackRPi#return-to-libc-)
 - [Return-Oriented Programming](https://github.com/korkeep/HackRPi#return-oriented-programming-)
 
+## Attack Architecture
+![image](https://user-images.githubusercontent.com/20378368/107835440-dd6be300-6ddc-11eb-9c66-89ae7ba0a39c.png)  
+
 ## System Call Hooking 🐱‍💻
 ### Insert kernel files to RPi
 - **Step 1**: Mount SD card  
