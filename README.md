@@ -153,7 +153,7 @@ pi@korkeep:~/RTL $ gcc -fno-stack-protector -z execstack -fno-pic -o RTL RTL.c
 pi@korkeep:~/RTL $ gdb -q RTL
 (gdb) start
 ```
-- **Step 4**: Disassemble rtl()  
+- **Step 4**: Disassemble vulnerable function  
 ```
 (gdb) disassemble rtl
 ```
