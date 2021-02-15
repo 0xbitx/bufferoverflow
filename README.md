@@ -173,7 +173,6 @@ pi@korkeep:~/RTL $ gdb -q RTL
 ![image](https://user-images.githubusercontent.com/20378368/107734200-3174ba00-6d40-11eb-8306-32b063492b3f.png)  
 
 ## Return-Oriented Programming 🐱‍💻
-### Binary analysis
 - **Step 1**: Set ASLR  
 ```
 pi@korkeep:~/ROP $ sudo sysctl -w kernel.randomize_va_space=1
