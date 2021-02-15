@@ -206,9 +206,9 @@ pi@korkeep:~/ROP $ gdb -q ROP
 ![image](https://user-images.githubusercontent.com/20378368/107897595-d8de3080-6f7c-11eb-9a9d-af40b59e1b36.PNG)  
 - **Step 8**: Calculate return address  
 ```
-+ lr,r11 (main): 0x7efff640
++ lr,r11(main): 0x7efff640
 + argc,argv: 0x7efff638
-+ lr,r11 (rop): 0x7efff630
++ lr,r11(rop): 0x7efff630
 + buf[256]: 0x7efff530
 ∴ Target address: 0x7efff530
 ```
