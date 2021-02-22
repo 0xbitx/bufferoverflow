@@ -7,7 +7,7 @@
 ## Attack Architecture
 ![image](https://user-images.githubusercontent.com/20378368/107835440-dd6be300-6ddc-11eb-9c66-89ae7ba0a39c.png)  
 
-## System Call Hooking 🐱‍💻
+## System Call Hooking 👿
 ### Insert kernel files to RPi
 - **Step 1**: Mount SD card  
 ```
@@ -65,7 +65,7 @@ pi@korkeep:~/Hook$ sudo insmod hooker.ko
 - **Result**  
 ![image](https://user-images.githubusercontent.com/20378368/107735072-30dd2300-6d42-11eb-888f-a2340d252d6c.PNG)
 
-## Buffer Overflow 🐱‍💻
+## Buffer Overflow 👿
 - **Step 1**: Unlock ASLR  
 ```
 pi@korkeep:~/BOF $ sudo sysctl -w kernel.randomize_va_space=0
@@ -103,7 +103,7 @@ pi@korkeep:~/BOF $ gdb -q BOF
 - **Result**  
 ![image](https://user-images.githubusercontent.com/20378368/107658056-1dda3c80-6cc9-11eb-9173-69a569d9439f.png)  
 
-## Return-To-Libc 🐱‍💻
+## Return-To-Libc 👿
 ### Original RTL attack scheme
 - **Step 1**: Unlock ASLR  
 ```
@@ -172,7 +172,7 @@ pi@korkeep:~/RTL $ gdb -q RTL
 - **Result**  
 ![image](https://user-images.githubusercontent.com/20378368/107734200-3174ba00-6d40-11eb-8306-32b063492b3f.png)  
 
-## Return-Oriented Programming 🐱‍💻
+## Return-Oriented Programming 👿
 - **Step 1**: Set ASLR  
 ```
 pi@korkeep:~/ROP $ sudo sysctl -w kernel.randomize_va_space=1
